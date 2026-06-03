@@ -4,16 +4,17 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import com.api.base.BaseTest;
+import com.api.utils.RequestSpecBuilderUtil;
 
-public class GetUsersTest {
+public class GetUsersTest extends BaseTest {
 
     @Test
     public void getUserTest() {
 
         Response response = RestAssured
                 .given()
-                .baseUri("https://jsonplaceholder.typicode.com")
-                .header("Content-Type", "application/json")
+                .spec(RequestSpecBuilderUtil.getRequestSpec())
                 .log().all()
                 .when()
                 .get("/users/1")
